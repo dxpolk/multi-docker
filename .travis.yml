@@ -10,14 +10,14 @@ script:
   - docker run -e CI=true dpolk/react-test npm test -- --coverage
 
 after_success:
-  - docker build -t dpolk/multi-client ./client 
-  - docker build -t dpolk/multi-nginx ./nginx
-  - docker build -t dpolk/multi-server ./server
-  - docker build -t dpolk/multi-worker ./worker
+  - docker build -t dxp03/multi-client ./client 
+  - docker build -t dxp03/multi-nginx ./nginx
+  - docker build -t dxp03/multi-server ./server
+  - docker build -t dxp03/multi-worker ./worker
   # Log in to the Docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Take those images and push them to docker hub
-  - docker push dpolk/multi-client
-  - docker push dpolk/multi-nginx
-  - docker push dpolk/multi-server
-  - docker push dpolk/multi-worker
+  - docker push dxp03/multi-client
+  - docker push dxp03/multi-nginx
+  - docker push dxp03/multi-server
+  - docker push dxp03/multi-worker

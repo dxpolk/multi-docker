@@ -1,0 +1,22 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t dpolk/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run dpolk/react-test npm test -- --coverage
+
+after_success:
+  - docker build -t dpolk/multi-client ./client 
+  - docker build -t dpolk/multi-nginx ./nginx
+  - docker build -t dpolk/multi-server ./server
+  - docker build -t dpolk/multi-worker ./worker
+  # Log in to the Docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Take those images and push them to docker hub
+  - docker push dpolk/multi-client
+  - docker push dpolk/multi-nginx
+  - docker push dpolk/multi-server
+  - docker push dpolk/multi-worker

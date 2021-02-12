@@ -17,14 +17,14 @@
         },
         {
             "name": "worker",
-            "image": "dpolk/multi-worker",
+            "image": "dxp03/multi-worker",
             "hostname": "worker",
             "essential": false,
             "memory": 128
         },
         {
             "name": "nginx",
-            "image": "dpolk/multi-nginx",
+            "image": "dxp03/multi-nginx",
             "hostname": "nginx",
             "essential": true,
             "port_mappings": [
